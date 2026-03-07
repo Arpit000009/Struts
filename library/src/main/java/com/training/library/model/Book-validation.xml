@@ -1,0 +1,32 @@
+<!DOCTYPE validators PUBLIC
+"-//Apache Struts//XWork Validator 1.0.3//EN"
+"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+
+    <field name="title">
+        <field-validator type="requiredstring">
+            <message>Title is required</message>
+        </field-validator>
+    </field>
+
+    <field name="author">
+        <field-validator type="requiredstring">
+            <message>Author is required</message>
+        </field-validator>
+    </field>
+
+    <field name="price">
+
+        <field-validator type="required">
+            <message>Price is required</message>
+        </field-validator>
+
+        <field-validator type="regex">
+            <param name="regexExpression">^\d+(\.\d+)?$</param>
+            <message>Price must contain only numbers</message>
+        </field-validator>
+
+    </field>
+
+</validators>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+"https://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" namespace="/" extends="struts-default">
+
+		<!-- Dashboard -->
+
+		<action name="dashboard"
+			class="com.training.library.action.DashboardAction">
+
+			<result>/dashboard.jsp</result>
+
+		</action>
+
+		<!-- Open Add Book Page -->
+
+		<action name="addBookPage">
+
+			<result>/addBook.jsp</result>
+
+		</action>
+
+		<!-- Add Book -->
+
+		<action name="addBook"
+			class="com.training.library.action.AddBookAction">
+
+			<result name="input">/addBook.jsp</result>
+
+			<result name="success" type="redirectAction">
+				dashboard
+			</result>
+
+		</action>
+
+		<!-- View All Books -->
+
+		<action name="viewBooks"
+			class="com.training.library.action.ViewBooksAction" >
+
+			<result>/viewBooks.jsp</result>
+
+		</action>
+
+		<!-- Search Book -->
+
+		<action name="searchBook"
+			class="com.training.library.action.SearchBookAction">
+
+			<result name="input">/searchBook.jsp</result>
+
+			<result name="success">/searchBook.jsp</result>
+
+		</action>
+
+		<!-- Update Book -->
+
+		<action name="editBook"
+			class="com.training.library.action.EditBookAction">
+
+			<result>/updateBook.jsp</result>
+
+		</action>
+
+
+		<action name="updateBook"
+			class="com.training.library.action.UpdateBookAction">
+
+			<result type="redirectAction">
+				viewBooks
+			</result>
+
+		</action>
+		<!-- Delete Book -->
+
+		<action name="deleteBook"
+			class="com.training.library.action.DeleteBookAction">
+
+			<result type="redirectAction">
+				viewBooks
+			</result>
+
+		</action>
+
+	</package>
+
+</struts>
