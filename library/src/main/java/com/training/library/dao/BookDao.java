@@ -11,94 +11,78 @@ import lombok.Data;
 @Data
 public class BookDao {
 
-    public void saveBook(Book book) {
+	public void saveBook(Book book) {
 
-        Session session = HibernateUtil
-                .getSessionFactory()
-                .openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-        session.beginTransaction();
+		session.beginTransaction();
 
-        session.save(book);
+		session.save(book);
 
-        session.getTransaction().commit();
+		session.getTransaction().commit();
 
-        session.close();
-    }
+		session.close();
+	}
 
-    public List<Book> getAllBooks() {
+	public List<Book> getAllBooks() {
 
-        Session session = HibernateUtil
-                .getSessionFactory()
-                .openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-        List<Book> list =
-                session.createQuery("from Book", Book.class)
-                .list();
+		List<Book> list = session.createQuery("from Book", Book.class).list();
 
-        session.close();
+		session.close();
 
-        return list;
-    }
+		return list;
+	}
 
-    public Book getBookById(int id) {
+	public Book getBookById(int id) {
 
-        Session session = HibernateUtil
-                .getSessionFactory()
-                .openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-        Book book = session.get(Book.class, id);
+		Book book = session.get(Book.class, id);
 
-        session.close();
+		session.close();
 
-        return book;
-    }
+		return book;
+	}
 
-    public void updateBook(Book book) {
+	public void updateBook(Book book) {
 
-        Session session = HibernateUtil
-                .getSessionFactory()
-                .openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-        session.beginTransaction();
+		session.beginTransaction();
 
-        session.update(book);
+		session.update(book);
 
-        session.getTransaction().commit();
+		session.getTransaction().commit();
 
-        session.close();
-    }
+		session.close();
+	}
 
-    public void deleteBook(int id) {
+	public void deleteBook(int id) {
 
-        Session session = HibernateUtil
-                .getSessionFactory()
-                .openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-        session.beginTransaction();
+		session.beginTransaction();
 
-        Book book = session.get(Book.class, id);
+		Book book = session.get(Book.class, id);
 
-        session.delete(book);
+		session.delete(book);
 
-        session.getTransaction().commit();
+		session.getTransaction().commit();
 
-        session.close();
-    }
-    
-    public List<Book> searchBooks(String title){
+		session.close();
+	}
 
-        Session session = HibernateUtil
-                .getSessionFactory()
-                .openSession();
+	public List<Book> searchBooks(String title) {
 
-        List<Book> list = session
-                .createQuery("from Book where lower(title) like :title", Book.class)
-                .setParameter("title", "%" + title.toLowerCase() + "%")
-                .list();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 
-        session.close();
+		List<Book> list = session.createQuery("from Book where lower(title) like :title", Book.class)
+				.setParameter("title", "%" + title.toLowerCase() + "%").list();
 
-        return list;
-    }
+		session.close();
+
+		return list;
+	}
 }

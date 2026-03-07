@@ -1,51 +1,117 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>View Books</title>
+
+<style>
+
+body{
+margin:0;
+padding:0;
+font-family:Arial;
+background:linear-gradient(135deg,#667eea,#764ba2);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.container{
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+width:700px;
+}
+
+h2{
+text-align:center;
+margin-bottom:25px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+table th{
+background:#667eea;
+color:white;
+padding:10px;
+}
+
+table td{
+padding:10px;
+border-bottom:1px solid #ddd;
+text-align:center;
+}
+
+.action{
+text-decoration:none;
+color:#667eea;
+font-weight:bold;
+}
+
+.action:hover{
+text-decoration:underline;
+}
+
+.back{
+display:block;
+text-align:center;
+margin-top:20px;
+text-decoration:none;
+color:#667eea;
+}
+
+</style>
+
 </head>
 
 <body>
 
-	<h2>Book List</h2>
+<div class="container">
 
-	<table border="1">
+<h2>Book List</h2>
 
-		<tr>
-			<th>ID</th>
-			<th>Title</th>
-			<th>Author</th>
-			<th>Price</th>
-			<th>Delete</th>
-		</tr>
-		
-		<s:iterator value="books">
+<table>
 
-			<tr>
+<tr>
+<th>ID</th>
+<th>Title</th>
+<th>Author</th>
+<th>Price</th>
+<th>Update</th>
+<th>Delete</th>
+</tr>
 
-				<td><s:property value="id" /></td>
-				<td><s:property value="title" /></td>
-				<td><s:property value="author" /></td>
-				<td><s:property value="price" /></td>
+<s:iterator value="books">
 
-				<td><a href="editBook?id=<s:property value='id'/>">Update</a></td>
+<tr>
 
-				<td><a href="deleteBook?id=<s:property value='id'/>">Delete</a>
-				</td>
+<td><s:property value="id"/></td>
+<td><s:property value="title"/></td>
+<td><s:property value="author"/></td>
+<td><s:property value="price"/></td>
 
-			</tr>
+<td>
+<a class="action" href="editBook?id=<s:property value='id'/>">Update</a>
+</td>
 
-		</s:iterator>
-	</table>
+<td>
+<a class="action" href="deleteBook?id=<s:property value='id'/>">Delete</a>
+</td>
 
-	<br>
+</tr>
 
-	<a href="dashboard">Back to Dashboard</a>
+</s:iterator>
+
+</table>
+
+<a href="dashboard" class="back">Back to Dashboard</a>
+
+</div>
 
 </body>
 </html>
