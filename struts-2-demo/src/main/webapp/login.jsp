@@ -9,8 +9,15 @@
 </head>
 <body>
 <h1>login page</h1>
+
+
+
 <s:form action="login" method="post">
-    <s:textfield name="username" label="Username" /><br><br>
+    <s:textfield name="username" label="Username" />
+    <font color="red">
+<s:fielderror fieldName="username"/>
+</font>
+    <br><br>
     <s:password name="password" label="Password" /><br><br>
     <s:submit value="Login" />
     </s:form>

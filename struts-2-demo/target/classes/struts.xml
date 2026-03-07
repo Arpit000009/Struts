@@ -5,7 +5,7 @@
 <struts>
 
 	<constant name="struts.objectFactory" value="spring" />
-
+	<constant name="struts.devMode" value="true"/>
     <package name="default" extends="struts-default">
         <interceptors>
             <interceptor name="accountSecurity"
@@ -29,13 +29,13 @@
         <action name="login" class="com.training.action.LoginAction">
 
             <!-- <interceptor-ref name="customStack" /> -->
-
+			<result name="input">/login.jsp</result>
 
             <result name="success">/success.jsp</result>
-            <result name="failure">/failure.jsp</result>
+            <result type="freemarker" name="failure">/failure.ftl</result>
             <result name="locked">/accountLocked.jsp</result>
-            <result name="admin" type="redirectAction">adminDashboard</result>
-            <result name="customer" type="redirectAction">customerDashboard</result>
+            <result name="admin" type="chain">adminDashboard</result>
+            <result name="customer" type="chain">customerDashboard</result>
         </action>
 
         <!-- Admin protected -->
@@ -60,6 +60,52 @@
                 <result name="success">/customer.jsp</result>
             <result name="unauthorized">/unauthorized.jsp</result>
         </action>
+        
+        <action name="addProductPage">
+
+<interceptor-ref name="roleInterceptor">
+<param name="requiredRole">ADMIN</param>
+</interceptor-ref>
+
+<interceptor-ref name="defaultStack"/>
+
+<result name="success">/addProduct.jsp</result>
+
+</action>
+        
+        
+        
+        
+        <action name="addProduct"
+        class="com.training.action.AddProductAction">
+
+    <interceptor-ref name="roleInterceptor">
+        <param name="requiredRole">ADMIN</param>
+    </interceptor-ref>
+
+    <interceptor-ref name="defaultStack"/>
+
+    <result name="success">/admin.jsp</result>
+	</action>
+	
+
+	<action name="viewProducts"
+        class="com.training.action.ViewProductsAction">
+
+    <interceptor-ref name="roleInterceptor">
+        <param name="requiredRole">CUSTOMER</param>
+    </interceptor-ref>
+
+    <interceptor-ref name="defaultStack"/>
+
+    <result  type="freemarker" name="success">/products.ftl</result>
+</action>
+
+	<action name="dashboard" 
+	class="com.training.action.DashboardAction">
+	
+	<result type="freemarker">dashboard.ftl</result>
+	 </action>
 
 
 

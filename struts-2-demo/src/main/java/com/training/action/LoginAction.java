@@ -7,56 +7,64 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 import com.training.dao.UserDao;
 import com.training.model.User;
 
+import lombok.Data;
 
-@Component("loginAction")       
-@Scope("prototype") 
-public class LoginAction extends ActionSupport {
+@Data
+@Component("loginAction")
+@Scope("prototype")
+public class LoginAction extends ActionSupport implements ModelDriven<User>{
 
     private String username;
     private String password;
-
     @Autowired
     private UserDao userDao;
+    private User user = new User();
+    @Override
+	public User getModel() {
+		// TODO Auto-generated method stub
+		return user;
+	}
 
-   
-	/*
-	 * public void setUserDao(UserDao userDao) { this.userDao = userDao; }
-	 */
+    
 
     public String execute() {
-      
-        User user = userDao.validateUser(username, password);
 
-        if (user != null) {
-            HttpSession session = ServletActionContext
-                    .getRequest()
-                    .getSession();
-            session.setAttribute("role", user.getRole());
+        User dbUser = userDao.validateUser(user.getUsername(), user.getPassword());
 
-            if ("ADMIN".equals(user.getRole())) {
-                return "admin";
-            }
-            if ("CUSTOMER".equals(user.getRole())) {
-                return "customer";
-            }
+        if (dbUser == null) {
+            return "failure";
         }
-        return "failure";
+
+        if ("ADMIN".equals(dbUser.getRole())) {
+            return "admin";
+        }
+
+        if ("CUSTOMER".equals(dbUser.getRole())) {
+            return "customer";
+        }
+
+//        HttpSession session = ServletActionContext
+//                .getRequest()
+//                .getSession();
+//
+//        session.setAttribute("user", user.getUsername());
+//        session.setAttribute("role", user.getRole());
+
+//        ActionContext.getContext().getValueStack().push(user);
+        
+
+        
+
+        return SUCCESS;
     }
 
-    public String getUsername() {
-    	return username;
-    	}
-    public void setUsername(String username) {
-    	this.username = username;
-    	}
-    public String getPassword() { 
-    	return password; 
-    	}
-    public void setPassword(String password) { 
-    	this.password = password;
-    	}
+    
+
+	
 }

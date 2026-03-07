@@ -7,6 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import com.training.model.Product;
 import com.training.model.User;
 
 public class HibernateUtil {
@@ -33,6 +34,7 @@ public class HibernateUtil {
             configuration.setProperties(settings);
 
             configuration.addAnnotatedClass(User.class);
+            configuration.addAnnotatedClass(Product.class);
 
             ServiceRegistry serviceRegistry =
                     new StandardServiceRegistryBuilder()
