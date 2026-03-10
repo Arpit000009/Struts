@@ -39,20 +39,25 @@
 
     <!-- ===== Compile Java ===== -->
 
-    <target name="compile" depends="clean,init">
+	<target name="compile" depends="clean,init">
 
-        <javac srcdir="${src.dir}"
-               destdir="${classes.dir}"
-               includeantruntime="false"
-               debug="true">
+	    <javac srcdir="${src.dir}"
+	           destdir="${classes.dir}"
+	           includeantruntime="false"
+	           debug="true">
 
-            <classpath>
-                <fileset dir="${lib.dir}" includes="*.jar"/>
-            </classpath>
+	        <classpath>
+	            <fileset dir="${lib.dir}" includes="*.jar"/>
+	        </classpath>
 
-        </javac>
+	    </javac>
 
-    </target>
+	    <!-- Copy resources like struts.xml -->
+	    <copy todir="${classes.dir}">
+	        <fileset dir="src/main/resources"/>
+	    </copy>
+
+	</target>
 
     <!-- ===== Create WAR ===== -->
 

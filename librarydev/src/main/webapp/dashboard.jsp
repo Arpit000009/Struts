@@ -62,6 +62,7 @@ a:hover {
 
 		<a href="addBookPage">Add New Book</a> <a href="viewBooks">View
 			All Books</a> <a href="searchBook.jsp">Search Book</a>
+			<a href="withdraw.jsp">withdraw</a>
 
 	</div>
 

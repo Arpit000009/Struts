@@ -87,7 +87,15 @@
 			</result>
 
 		</action>
+		
+		<action name="withdraw" class = "com.training.library.action.WithdrawAction">
+		<result name="success">success.jsp</result> 
+		<exception-mapping result="error" exception="com.training.library.exception.InsufficientBalanceException"></exception-mapping>
+		<result name = "error">error.jsp</result>
+		</action>
 
 	</package>
+	
+	
 
 </struts>
