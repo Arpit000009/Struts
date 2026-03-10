@@ -1,0 +1,29 @@
+
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+ "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+ <package name="default" namespace="/" extends="struts-default">
+
+	<action name="">
+   <result type="redirect">employees</result>
+  </action>
+
+  <action name="employees" class="com.enterprise.action.EmployeeAction">
+   <result name="success">/employee-list.jsp</result>
+  </action>
+  
+  <action name="saveEmployee" 
+        class="com.enterprise.action.EmployeeAction"
+        method="saveEmployee">
+
+    <result name="success" type="redirect">employees</result>
+    
+    <result name="input">/addEmployee.jsp</result>
+
+</action>
+  
+
+ </package>
+</struts>

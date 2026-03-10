@@ -1,0 +1,26 @@
+<!DOCTYPE validators PUBLIC
+"-//Apache Struts//XWork Validator 1.0.3//EN"
+"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+
+<validators>
+
+    <field name="name">
+        <field-validator type="requiredstring">
+            <message>Name is required</message>
+        </field-validator>
+    </field>
+
+    <field name="department">
+        <field-validator type="requiredstring">
+            <message>Department is required</message>
+        </field-validator>
+    </field>
+
+    <field name="salary">
+        <field-validator type="double">
+            <param name="minInclusive">1000</param>
+            <message>Salary must be greater than 1000</message>
+        </field-validator>
+    </field>
+
+</validators>
